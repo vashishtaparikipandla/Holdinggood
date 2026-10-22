@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Holding Good</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --ink:#0C0C0C;
+    --soft:#707070;
+    --line:#ECECEC;
+    --media:#F4F4F3;
+    --media-ink:#B9B9B6;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box}
+  html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 78px); -webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Manrope",system-ui,sans-serif;
+    font-size:clamp(16px,1.02vw,17.5px); line-height:1.62; font-weight:400;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:1200px; margin:0 auto; padding:0 clamp(22px,5vw,72px)}
+  .col{max-width:58ch}
+  p{margin:0 0 1.1em}
+  a{color:inherit}
+
+  h1,h2,h3{font-weight:300; letter-spacing:-.025em; line-height:1.06; margin:0}
+  h1{font-size:clamp(2.6rem,7.2vw,5.4rem)}
+  h2{font-size:clamp(2rem,4.6vw,3.4rem); line-height:1.1}
+  h3{font-size:clamp(1.9rem,4vw,3rem)}
+  .kicker{font-size:.9rem; color:var(--soft); font-weight:500; letter-spacing:0}
+  .lead{font-weight:300; font-size:clamp(1.2rem,2.1vw,1.6rem); color:var(--soft); line-height:1.45; letter-spacing:-.01em}
+
+  /* header */
+  header{position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 90%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+  .bar{display:flex; align-items:center; justify-content:space-between; height:72px}
+  .mark{font-size:1.15rem; font-weight:500; letter-spacing:-.02em; text-decoration:none}
+  nav a{margin-left:2.2rem; font-size:.95rem; color:var(--soft); text-decoration:none; transition:color .2s}
+  nav a:hover{color:var(--ink)}
+  @media (max-width:760px){nav{display:none}}
+
+  /* hero */
+  .hero{padding:clamp(72px,17vh,190px) 0 clamp(56px,11vh,130px)}
+  .hero .kicker{margin-bottom:1.6rem}
+  .hero h1{max-width:15ch}
+  .hero .lead{margin-top:2rem; max-width:40ch}
+
+  /* full-bleed media band */
+  .band{width:100%; background:var(--media)}
+  .band .media{aspect-ratio:16/7}
+  section{padding:clamp(64px,11vh,140px) 0}
+  .rule{border:0; border-top:1px solid var(--line); margin:0}
+
+  /* media placeholder — swap for real photography */
+  .media{position:relative; background:var(--media); color:var(--media-ink); overflow:hidden; display:flex; align-items:center; justify-content:center}
+  .media svg{width:min(38%,150px); height:auto; opacity:.75}
+  .media .cap{position:absolute; left:16px; bottom:14px; font-size:.72rem; letter-spacing:.04em; color:var(--media-ink)}
+
+  /* name story */
+  .eyebrow{font-size:.9rem; color:var(--soft); font-weight:500; margin-bottom:1.4rem}
+  .pull{font-weight:200; font-size:clamp(1.7rem,3.6vw,2.8rem); line-height:1.18; letter-spacing:-.02em; margin:.2rem 0 .2rem; max-width:20ch}
+  .story .col p{color:var(--soft)}
+  .story .col p.big{color:var(--ink); font-size:1.1em}
+
+  /* beliefs */
+  .beliefs{display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,4.5vw,70px) clamp(48px,7vw,110px); margin-top:2.8rem}
+  .belief h3{font-size:clamp(1.15rem,1.8vw,1.4rem); font-weight:500; letter-spacing:-.01em; margin-bottom:.55rem}
+  .belief p{color:var(--soft); margin:0; font-size:.98em}
+  @media (max-width:640px){.beliefs{grid-template-columns:1fr; gap:2.2rem}}
+
+  /* ventures */
+  .venture{display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,80px); align-items:center; padding:clamp(52px,8vh,104px) 0; border-top:1px solid var(--line)}
+  .venture .media{aspect-ratio:4/3; width:100%; border-radius:2px}
+  .venture:nth-child(even) .v-media{order:2}
+  .v-name{margin-bottom:.2rem}
+  .status{display:inline-block; margin:.9rem 0 1.4rem; font-size:.82rem; color:var(--soft); font-weight:500}
+  .v-text .what{color:var(--ink); font-size:1.12em; margin-bottom:.85em; font-weight:400}
+  .v-text p{color:var(--soft)}
+  .v-links{display:flex; gap:1.6rem; flex-wrap:wrap; margin-top:1.2rem}
+  .v-links a{font-size:.95rem; color:var(--ink); text-decoration:none; border-bottom:1px solid var(--ink); padding-bottom:2px; transition:opacity .2s}
+  .v-links a:hover{opacity:.55}
+  @media (max-width:760px){
+    .venture{grid-template-columns:1fr; gap:1.6rem; padding:48px 0}
+    .venture:nth-child(even) .v-media{order:0}
+  }
+
+  /* note */
+  .note{display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,5vw,80px); align-items:center}
+  .note .media{aspect-ratio:3/4; border-radius:2px}
+  .note .n-text{max-width:48ch}
+  .sign{color:var(--soft); margin-top:1.6rem}
+  @media (max-width:760px){.note{grid-template-columns:1fr; gap:2rem} .note .media{aspect-ratio:4/3}}
+
+  /* invite */
+  .invite h2{max-width:16ch}
+  .mail{display:inline-block; margin-top:1.8rem; font-weight:300; font-size:clamp(1.5rem,3.4vw,2.4rem); letter-spacing:-.02em; text-decoration:none; border-bottom:1px solid var(--ink); padding-bottom:4px}
+  .mail:hover{opacity:.6}
+
+  footer{border-top:1px solid var(--line); padding:44px 0; color:var(--soft); font-size:.9rem}
+  .foot{display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+
+  /* single, quiet entrance */
+  .fade{opacity:0; transform:translateY(8px); animation:in .9s ease .2s forwards}
+  @keyframes in{to{opacity:1; transform:none}}
+  @media (prefers-reduced-motion:reduce){.fade{animation:none; opacity:1; transform:none}}
+  a:focus-visible,.mark:focus-visible{outline:2px solid var(--ink); outline-offset:3px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="mark" href="#top">Holding&nbsp;Good</a>
+    <nav>
+      <a href="#story">The name</a>
+      <a href="#believe">What we care about</a>
+      <a href="#house">The house</a>
+      <a href="#hello">Say hello</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO: one line + short sub-line -->
+  <section class="hero">
+    <div class="wrap fade">
+      <div class="kicker">Holding Good — a small group of companies</div>
+      <h1>A house for good things.</h1>
+      <p class="lead">A few companies I care for by hand — kept close while they grow, then sent out into the world.</p>
+    </div>
+  </section>
+
+  <!-- establishing image -->
+  <div class="band">
+    <div class="media">
+      <svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 44 60 16l42 28"/><path d="M28 40v26h64V40"/><path d="M52 66V50h16v16"/></svg>
+      <span class="cap">Placeholder — a wide, quiet image of the "house" idea</span>
+    </div>
+  </div>
+
+  <!-- NAME STORY (replace with the real story behind the name) -->
+  <section class="story" id="story">
+    <div class="wrap col">
+      <p class="eyebrow">Why it's called Holding Good</p>
+      <p class="big">Some things are worth holding on to. A voice you don't want to forget. A craft that took years to learn. A promise you make to the people who trust you.</p>
+      <p class="pull">To hold good is to keep what matters, and to keep your word.</p>
+      <p>Holding Good is where I look after ideas until they're ready — giving each one room, time, and care before it goes out on its own. Not a fund. Not a factory. A house.</p>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- BELIEFS -->
+  <section id="believe">
+    <div class="wrap">
+      <div class="col">
+        <p class="eyebrow">What we care about</p>
+        <h2>A few things we don't compromise on.</h2>
+      </div>
+      <div class="beliefs">
+        <div class="belief"><h3>Keep what matters</h3><p>Every company here helps someone hold on to something — a memory, a tradition, a place.</p></div>
+        <div class="belief"><h3>Made by hand</h3><p>Small teams, real craft, close attention. The details are the product, not an afterthought.</p></div>
+        <div class="belief"><h3>Honest about money and time</h3><p>No hidden fees, no vanity spending, no promises we can't keep.</p></div>
+        <div class="belief"><h3>Built slowly, on purpose</h3><p>Companies meant to be useful in twenty years, not flipped in two.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VENTURES -->
+  <section id="house" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="col">
+        <p class="eyebrow">What's in the house right now</p>
+        <h2>Three companies, each with its own life.</h2>
+      </div>
+
+      <!-- DearDay -->
+      <article class="venture">
+        <div class="v-media">
+          <div class="media">
+            <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M60 24C50 16 34 16 26 20v50c8-4 24-4 34 4"/><path d="M60 24c10-8 26-8 34-4v50c-8-4-24-4-34 4V24z"/><path d="M60 28v46"/></svg>
+            <span class="cap">DearDay — placeholder</span>
+          </div>
+        </div>
+        <div class="v-text">
+          <h3 class="v-name">DearDay</h3>
+          <span class="status">In early testing</span>
+          <p class="what">A memory journal for the things you never want to lose.</p>
+          <p>Carry your moments through a whole life — writing them down as you go, then turning the ones that matter most into a printed book you can hold and pass on.</p>
+          <div class="v-links"><a href="#hello">Join early access</a></div>
+        </div>
+      </article>
+
+      <!-- Haldi Alta -->
+      <article class="venture">
+        <div class="v-media">
+          <div class="media">
+            <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M40 14c0 8-8 10-8 20s8 12 8 22-8 12-8 20"/><path d="M60 14c0 8-8 10-8 20s8 12 8 22-8 12-8 20"/><path d="M80 14c0 8-8 10-8 20s8 12 8 22-8 12-8 20"/></svg>
+            <span class="cap">Haldi Alta — placeholder</span>
+          </div>
+        </div>
+        <div class="v-text">
+          <h3 class="v-name">Haldi Alta</h3>
+          <span class="status">Live on Instagram &amp; WhatsApp</span>
+          <p class="what">A curated collection of traditional wear for women.</p>
+          <p>Named for haldi and alta — the warmth and colour of ceremony — a considered, small-batch selection of Indian traditional clothing, sold personally rather than through a storefront.</p>
+          <div class="v-links"><a href="#">Shop on Instagram</a><a href="#">Message on WhatsApp</a></div>
+        </div>
+      </article>
+
+      <!-- Kaido -->
+      <article class="venture">
+        <div class="v-media">
+          <div class="media">
+            <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="24" y="20" width="72" height="36" rx="2"/><path d="M40 56v18M80 56v18M34 74h12M74 74h12"/><path d="M36 32h30M36 42h48"/></svg>
+            <span class="cap">Kaido — placeholder</span>
+          </div>
+        </div>
+        <div class="v-text">
+          <h3 class="v-name">Kaido</h3>
+          <span class="status">Coming soon</span>
+          <p class="what">A clear, open marketplace for outdoor advertising.</p>
+          <p>Kaido brings hoardings into the open — find the sites available for your campaign, talk terms directly with vendors, and run it, all in one place. The messy world of OOH, made simple.</p>
+          <div class="v-links"><a href="#hello">Get notified at launch</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- NOTE (replace with your own words + name + photo) -->
+  <section>
+    <div class="wrap note">
+      <div class="media">
+        <svg viewBox="0 0 90 110" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="45" cy="40" r="16"/><path d="M18 92c2-16 14-24 27-24s25 8 27 24"/></svg>
+        <span class="cap">Your portrait — placeholder</span>
+      </div>
+      <div class="n-text">
+        <p class="eyebrow">A note from me</p>
+        <p>I didn't set out to build a group of companies. I set out to build a few good things, and found they shared the same instinct — to hold on to what matters and treat it with care. Holding Good is simply the house I keep them in while they find their feet.</p>
+        <p>If any of this resonates — as a customer, a maker, or someone who wants to build alongside us — I'd love to hear from you.</p>
+        <p class="sign">— [Your name], founder</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <!-- INVITE -->
+  <section class="invite" id="hello">
+    <div class="wrap">
+      <h2>Come say hello.</h2>
+      <a class="mail" href="mailto:hello@holdinggood.com">hello@holdinggood.com</a>
+      <p style="color:var(--soft); margin-top:1.6rem">Bengaluru, India</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>Holding Good — DearDay, Haldi Alta, Kaido</span>
+    <span>Made with care in India</span>
+  </div>
+</footer>
+
+</body>
+</html>
